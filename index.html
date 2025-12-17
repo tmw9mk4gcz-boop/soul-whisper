@@ -3,37 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soul Whisper | 灵感空间</title>
+    <title>Soul Whisper</title>
     <style>
-        body {
+        /* 全局样式：去除滚动条，固定视口 */
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a; /* 基础底色 */
+            font-family: "STSong", "华文宋体", "SimSun", serif;
+        }
+
+        /* 动态朦胧的油画背景层 */
+        .oil-bg {
+            position: fixed;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            /* 采用深绿、暗棕与枯焦色的油画质感渐变 */
+            background: radial-gradient(circle at 20% 30%, #2c3e50 0%, transparent 40%),
+                        radial-gradient(circle at 80% 20%, #4b382a 0%, transparent 40%),
+                        radial-gradient(circle at 50% 80%, #2d3436 0%, transparent 50%),
+                        #24292e;
+            filter: blur(80px) saturate(0.8); /* 极度朦胧感 */
+            animation: breatheBg 20s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        /* 油画画布纹理叠加 */
+        .canvas-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.12;
+            background-image: url('https://www.transparenttextures.com/patterns/canvas-orange.png');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 极简主义容器 */
+        .main-content {
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 优雅灰蓝渐变 */
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px); /* 磨砂玻璃特效 */
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             text-align: center;
-            max-width: 80%;
+            padding: 0 20px;
         }
-        h1 { color: #2d3436; font-size: 2.5em; margin-bottom: 20px; }
-        p { color: #636e72; font-size: 1.1em; line-height: 1.8; }
-        .footer { margin-top: 30px; font-size: 0.8em; color: #b2bec3; }
+
+        /* 标题样式 */
+        h1 {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 200;
+            font-size: 1.8rem;
+            letter-spacing: 1em; /* 极宽间距，体现克制 */
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        /* 核心文字样式 */
+        .quote {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            line-height: 2.5;
+            letter-spacing: 0.3em; /* 增加阅读的呼吸感 */
+            max-width: 600px;
+            font-weight: 300;
+            animation: textFadeIn 4s ease-out;
+        }
+
+        /* 装饰线条 */
+        .divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 30px 0;
+        }
+
+        /* 背景呼吸动画 */
+        @keyframes breatheBg {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.05) translate(-1%, -2%); }
+        }
+
+        /* 文字入场动画 */
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="glass-card">
+    <div class="oil-bg"></div>
+    <div class="canvas-overlay"></div>
+
+    <div class="main-content">
         <h1>Soul Whisper</h1>
-        <p>“我们的日志是一架隐形的秤，称量每一次悲喜的微小克重。”</p>
-        <p>✨ 欢迎来到这个正在设计的灵感角落 ✨</p>
-        <div class="footer">由 GitHub Pages 强力驱动</div>
+        <div class="divider"></div>
+        <div class="quote">
+            我们的日志是一架隐形的秤，<br>
+            称量每一次悲喜的微小克重
+        </div>
     </div>
 </body>
 </html>
